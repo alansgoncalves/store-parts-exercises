@@ -1,15 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Input, Select } from "@chakra-ui/react";
+import LoadingList from "../components/LoadingList";
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const [searchTerm, setSearchTerm] = useState(""); // state to search for terms
 	const [currentProdType, setCurrentProdType] = useState("all"); // state to filter by type
 
 	useEffect(() => {
+		setLoading(true);
 		(async () => {
 			const items = await fetch("http://localhost:8081/store/parts");
 			const data = await items.json();
+			setLoading(false);
 			setProducts(data);
 		})();
 	}, []);
@@ -69,24 +73,28 @@ const MainPage = () => {
 				</Select>
 			</div>
 			<ul>
-				{filteredProducts
-					.filter((value) => {
-						if (searchTerm === "") {
-							return value;
-						} else if (
-							value.name.toLowerCase().includes(searchTerm.toLowerCase())
-						) {
-							return value;
-						}
-						return false;
-					})
-					.map(({ name, price, type }) => (
-						<li key={name}>
-							<span>{name}</span>
-							<span>{type}</span>
-							<span>{price}</span>
-						</li>
-					))}
+				{loading ? (
+					<LoadingList />
+				) : (
+					filteredProducts
+						.filter((value) => {
+							if (searchTerm === "") {
+								return value;
+							} else if (
+								value.name.toLowerCase().includes(searchTerm.toLowerCase())
+							) {
+								return value;
+							}
+							return false;
+						})
+						.map(({ name, price, type }) => (
+							<li key={name}>
+								<span>{name}</span>
+								<span>{type}</span>
+								<span>{price}</span>
+							</li>
+						))
+				)}
 			</ul>
 		</div>
 	);
