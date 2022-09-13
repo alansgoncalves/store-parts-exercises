@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Input } from "@chakra-ui/react";
-import { Select } from "@chakra-ui/react";
+import { Input, Select } from "@chakra-ui/react";
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
@@ -20,6 +19,17 @@ const MainPage = () => {
 		setCurrentProdType(e.target.value);
 	};
 
+	// Function to order price
+	const handleOrder = (e) => {
+		const sortOrder = e.target.value;
+		const sortedProducts = [...products].sort((a, b) => {
+			return sortOrder === "low"
+				? parseFloat(a.price) - parseFloat(b.price)
+				: parseFloat(b.price) - parseFloat(a.price);
+		});
+		setProducts(sortedProducts);
+	};
+
 	// function responsible for filtering the products
 	// according to selected type
 	const filterProducts = () => {
@@ -31,22 +41,33 @@ const MainPage = () => {
 
 	return (
 		<div>
-			<Input
-				placeholder="Search"
-				w="30%"
-				m="auto"
-				onChange={(event) => {
-					setSearchTerm(event.target.value);
-				}}
-			/>
-			<Select onChange={handleSelect} w="30%" m="auto">
-				<option value="all">All</option>
-				<option value="Keyboard">Keyboard</option>
-				<option value="Monitor">Monitor</option>
-				<option value="Mouse">Mouse</option>
-				<option value="Mousepad">Mousepad</option>
-			</Select>
+			<div className="container">
+				<Input
+					placeholder="Search"
+					w="30%"
+					m="auto"
+					onChange={(event) => {
+						setSearchTerm(event.target.value);
+					}}
+				/>
+				<Select onChange={handleSelect} w="30%" m="auto">
+					<option value="all">All</option>
+					<option value="Keyboard">Keyboard</option>
+					<option value="Monitor">Monitor</option>
+					<option value="Mouse">Mouse</option>
+					<option value="Mousepad">Mousepad</option>
+				</Select>
 
+				<Select
+					w="20%"
+					m="auto"
+					placeholder="Order price:"
+					onChange={handleOrder}
+				>
+					<option value="low">Low price</option>
+					<option value="high">High price</option>
+				</Select>
+			</div>
 			<ul>
 				{filteredProducts
 					.filter((value) => {
@@ -60,7 +81,7 @@ const MainPage = () => {
 						return false;
 					})
 					.map(({ name, price, type }) => (
-						<li>
+						<li key={name}>
 							<span>{name}</span>
 							<span>{type}</span>
 							<span>{price}</span>
