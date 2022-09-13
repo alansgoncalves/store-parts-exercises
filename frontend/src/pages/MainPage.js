@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Input } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
+	const [searchTerm, setSearchTerm] = useState(""); // state to search for terms
+	const [currentProdType, setCurrentProdType] = useState("all");
 
 	useEffect(() => {
 		(async () => {
@@ -12,6 +14,20 @@ const MainPage = () => {
 			setProducts(data);
 		})();
 	}, []);
+
+	const handleSelect = (e) => {
+		// Type do produto selecionado no dropdown
+		setCurrentProdType(e.target.value);
+	};
+
+	// Função responsável por filtrar os produtos
+	// de acordo com o tipo selecionado
+	const filterProducts = () => {
+		if (currentProdType === "all") return products;
+		return products.filter(({ type }) => type === currentProdType);
+	};
+
+	const filteredProducts = useMemo(filterProducts, [products, currentProdType]);
 
 	return (
 		<div>
@@ -23,9 +39,16 @@ const MainPage = () => {
 					setSearchTerm(event.target.value);
 				}}
 			/>
+			<Select onChange={handleSelect} w="30%" m="auto">
+				<option value="all">All</option>
+				<option value="Keyboard">Keyboard</option>
+				<option value="Monitor">Monitor</option>
+				<option value="Mouse">Mouse</option>
+				<option value="Mousepad">Mousepad</option>
+			</Select>
 
 			<ul>
-				{products
+				{filteredProducts
 					.filter((value) => {
 						if (searchTerm === "") {
 							return value;
@@ -37,10 +60,10 @@ const MainPage = () => {
 						return false;
 					})
 					.map(({ name, price, type }) => (
-						<li key={name}>
-							{name}
-							{type}
-							{price}
+						<li>
+							<span>{name}</span>
+							<span>{type}</span>
+							<span>{price}</span>
 						</li>
 					))}
 			</ul>
