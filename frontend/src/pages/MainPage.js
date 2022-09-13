@@ -5,7 +5,7 @@ import { Select } from "@chakra-ui/react";
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
 	const [searchTerm, setSearchTerm] = useState(""); // state to search for terms
-	const [currentProdType, setCurrentProdType] = useState("all");
+	const [currentProdType, setCurrentProdType] = useState("all"); // state to filter by type
 
 	useEffect(() => {
 		(async () => {
@@ -16,12 +16,12 @@ const MainPage = () => {
 	}, []);
 
 	const handleSelect = (e) => {
-		// Type do produto selecionado no dropdown
+		// Type selected at dropdown
 		setCurrentProdType(e.target.value);
 	};
 
-	// Função responsável por filtrar os produtos
-	// de acordo com o tipo selecionado
+	// function responsible for filtering the products
+	// according to selected type
 	const filterProducts = () => {
 		if (currentProdType === "all") return products;
 		return products.filter(({ type }) => type === currentProdType);
