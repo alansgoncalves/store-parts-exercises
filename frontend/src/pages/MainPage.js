@@ -63,7 +63,7 @@ const MainPage = () => {
 					}}
 				/>
 				<Select onChange={handleSelect} w="30%">
-					<option value="all">All</option>
+					<option value="all">All types</option>
 					<option value="Keyboard">Keyboard</option>
 					<option value="Monitor">Monitor</option>
 					<option value="Mouse">Mouse</option>
