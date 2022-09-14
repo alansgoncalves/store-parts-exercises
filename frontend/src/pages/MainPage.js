@@ -1,12 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Input, Select } from "@chakra-ui/react";
 import LoadingList from "../components/LoadingList";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [searchTerm, setSearchTerm] = useState(""); // state to search for terms
 	const [currentProdType, setCurrentProdType] = useState("all"); // state to filter by type
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setLoading(true);
@@ -42,6 +45,11 @@ const MainPage = () => {
 	};
 
 	const filteredProducts = useMemo(filterProducts, [products, currentProdType]);
+
+	const handleClick = (products) => {
+		console.log(products);
+		navigate("/store", { state: products });
+	};
 
 	return (
 		<div>
@@ -87,11 +95,16 @@ const MainPage = () => {
 							}
 							return false;
 						})
-						.map(({ name, price, type }) => (
-							<li key={name}>
-								<span>{name}</span>
-								<span>{type}</span>
-								<span>{price}</span>
+						.map((products) => (
+							<li
+								// key={name}
+								onClick={() => {
+									handleClick(products);
+								}}
+							>
+								<span>{products.name}</span>
+								<span>{products.type}</span>
+								<span>{products.price}</span>
 							</li>
 						))
 				)}
