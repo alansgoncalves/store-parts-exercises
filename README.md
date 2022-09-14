@@ -58,3 +58,7 @@ Run the frontend
 <img width="1440" alt="Screen Shot 2022-09-13 at 22 26 48" src="https://user-images.githubusercontent.com/76542913/190038842-138497ba-370d-4b23-8f06-dbd52c37d7f2.png">
 
 <img width="1440" alt="Screen Shot 2022-09-13 at 22 27 03" src="https://user-images.githubusercontent.com/76542913/190038869-bd069750-073d-4682-9fbe-96b7f1c081df.png">
+
+### Parts Page
+
+<img width="1440" alt="Screen Shot 2022-09-14 at 08 42 23" src="https://user-images.githubusercontent.com/76542913/190144673-a775b988-f07f-4876-b855-78be03570fd7.png">
