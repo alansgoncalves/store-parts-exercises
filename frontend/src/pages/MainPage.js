@@ -53,16 +53,16 @@ const MainPage = () => {
 
 	return (
 		<div>
+			<h2 className="title-main">Store Parts</h2>
 			<div className="container">
 				<Input
 					placeholder="Search"
 					w="30%"
-					m="auto"
 					onChange={(event) => {
 						setSearchTerm(event.target.value);
 					}}
 				/>
-				<Select onChange={handleSelect} w="30%" m="auto">
+				<Select onChange={handleSelect} w="30%">
 					<option value="all">All</option>
 					<option value="Keyboard">Keyboard</option>
 					<option value="Monitor">Monitor</option>
@@ -70,12 +70,7 @@ const MainPage = () => {
 					<option value="Mousepad">Mousepad</option>
 				</Select>
 
-				<Select
-					w="20%"
-					m="auto"
-					placeholder="Order price:"
-					onChange={handleOrder}
-				>
+				<Select w="30%" placeholder="Order price:" onChange={handleOrder}>
 					<option value="low">Low price</option>
 					<option value="high">High price</option>
 				</Select>
@@ -102,9 +97,9 @@ const MainPage = () => {
 									handleClick(products);
 								}}
 							>
-								<span>{products.name}</span>
-								<span>{products.type}</span>
-								<span>{products.price}</span>
+								<span>name: {products.name}</span>
+								<span>type: {products.type}</span>
+								<span>price: {products.price}</span>
 							</li>
 						))
 				)}

@@ -61,9 +61,32 @@ ul li {
 	justify-content: space-between;
 	border: 1px solid;
 	padding: 15px;
+	cursor: pointer;
+}
+
+.title-main {
+	font-size: 28px;
+	font-weight: 600;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .container {
 	display: flex;
 	margin-bottom: 30px;
+	justify-content: space-between;
+}
+
+.parts {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid;
+	padding: 30px;
+	text-align: left;
+}
+
+.parts-cont {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
 }
