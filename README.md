@@ -33,6 +33,9 @@ Run the server on port 8081
 Run the frontend
 
 ```bash
+  cd frontend
+
+  npm install
   npm start
 ```
 
