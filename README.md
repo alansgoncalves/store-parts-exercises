@@ -8,10 +8,6 @@ Store-parts-exercises is an exercise is to build a Single Page Application to ex
 
 #
 
-## Deploy
-
-#
-
 ## Go to project's directory
 
 ```bash
